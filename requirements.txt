@@ -1,0 +1,5 @@
+numpy
+torch
+opencv-python
+PytorchWildlife
+tqdm>=4.65.0
