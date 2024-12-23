@@ -1,0 +1,28 @@
+services:
+  sender:
+    image: wietse-unifi-protect-backup
+    environment:
+      - UFP_USERNAME=${UFP_USERNAME}
+      - UFP_PASSWORD=${UFP_PASSWORD}
+      - UFP_ADDRESS=${UFP_ADDRESS}
+      - UFP_SSL_VERIFY=${UFP_SSL_VERIFY}
+      - ONLY_CAMERAS=${ONLY_CAMERAS}
+      - POSTPROCESS_BINARY=/postprocess/app.sh
+    volumes:
+      - /tmp/unifi/data:/data
+      - /tmp/unifi/db:/config/database
+      - ./docker/sender:/postprocess
+      - socket-data:/tmp/socket
+    user: root
+
+  receiver:
+    build: 
+      context: ./docker/receiver
+    volumes:
+      - /tmp/unifi/data:/data
+      - socket-data:/tmp/socket
+    user: root
+    platform: linux/arm64
+
+volumes:
+  socket-data:
