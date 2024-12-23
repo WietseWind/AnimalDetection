@@ -18,9 +18,12 @@ services:
   receiver:
     build: 
       context: ./docker/receiver
+    environment:
+      - FOLLOWUP_SCRIPT=${FOLLOWUP_SCRIPT:-/scripts/followup.sh}
     volumes:
       - ${UNIFI_DATA_PATH:-/tmp/unifi/data}:/data
       - socket-data:/tmp/socket
+      - ${FOLLOWUP_SCRIPTS_PATH:-./scripts}:/scripts
     user: root
     platform: linux/arm64
 

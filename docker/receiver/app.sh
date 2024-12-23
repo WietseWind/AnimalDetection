@@ -3,6 +3,7 @@ set -euo pipefail
 
 SOCKET_DIR="/tmp/socket"
 FIFO_PATH="${SOCKET_DIR}/events.fifo"
+FOLLOWUP_SCRIPT="/scripts/"${FOLLOWUP_SCRIPT:-followup.sh}
 
 mkdir -p "${SOCKET_DIR}"
 chmod 777 "${SOCKET_DIR}"
@@ -35,7 +36,22 @@ while true; do
                     rm -f "$fpath"
                 else
                     echo "Animals detected, keeping file: $fpath"
-                    echo " ---> Next: start Youtube upload process..."
+                    echo " ---> Next: checking for follow up process..."
+                    if [ -f "$FOLLOWUP_SCRIPT" ]; then
+                        echo "Found follow-up script at $FOLLOWUP_SCRIPT"
+                        if [ -x "$FOLLOWUP_SCRIPT" ]; then
+                            echo "Executing follow-up script..."
+                            set +e
+                            "$FOLLOWUP_SCRIPT" "$fpath"
+                            followup_status=$?
+                            set -e
+                            echo "Follow-up script completed with status: $followup_status"
+                        else
+                            echo "Follow-up script exists but is not executable"
+                        fi
+                    else
+                        echo "No follow-up script found at $FOLLOWUP_SCRIPT"
+                    fi
                 fi
                 echo "Processing complete, waiting for next event..."
                 ;;
