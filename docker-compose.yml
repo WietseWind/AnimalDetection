@@ -9,8 +9,8 @@ services:
       - ONLY_CAMERAS=${ONLY_CAMERAS}
       - POSTPROCESS_BINARY=/postprocess/app.sh
     volumes:
-      - /tmp/unifi/data:/data
-      - /tmp/unifi/db:/config/database
+      - ${UNIFI_DATA_PATH:-/tmp/unifi/data}:/data
+      - ${UNIFI_DB_PATH:-/tmp/unifi/db}:/config/database
       - ./docker/sender:/postprocess
       - socket-data:/tmp/socket
     user: root
@@ -19,7 +19,7 @@ services:
     build: 
       context: ./docker/receiver
     volumes:
-      - /tmp/unifi/data:/data
+      - ${UNIFI_DATA_PATH:-/tmp/unifi/data}:/data
       - socket-data:/tmp/socket
     user: root
     platform: linux/arm64
