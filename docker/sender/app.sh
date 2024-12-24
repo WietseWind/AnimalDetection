@@ -15,6 +15,8 @@ send_event() {
     
     while [ $attempt -lt $max_retries ]; do
         if [ -p "$FIFO_PATH" ]; then
+            fpath=$(echo "$parameter"|cut -d":" -f 2-100000)
+            chmod 777 "$fpath"
             echo "$event_type:$parameter" > "$FIFO_PATH"
             echo "Successfully sent event: $event_type"
             return 0

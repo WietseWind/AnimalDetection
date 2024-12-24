@@ -33,7 +33,7 @@ while true; do
                 set -e  # Re-enable exit on error
                 if [ $status -eq 1 ]; then
                     echo "No animals detected, removing file: $fpath"
-                    rm -f "$fpath"
+                    rm "$fpath"
                 else
                     echo "Animals detected, keeping file: $fpath"
                     echo " ---> Next: checking for follow up process..."
