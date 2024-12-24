@@ -2,3 +2,5 @@
 /.env
 /docker/unifi-protect-backup
 /unifi_data
+scripts/yt-upload/*.json
+/scripts/yt-upload/upload.sh
