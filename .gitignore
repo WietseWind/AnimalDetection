@@ -4,3 +4,4 @@
 /unifi_data
 scripts/yt-upload/*.json
 /scripts/yt-upload/upload.sh
+/scripts/vimeo-upload/.env
