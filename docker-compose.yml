@@ -19,7 +19,7 @@ services:
     build: 
       context: ./docker/receiver
       args:
-        - ADDITIONAL_PYTHON_PACKAGES=${ADDITIONAL_PYTHON_PACKAGES:-""}
+        - ADDITIONAL_PYTHON_PACKAGES=${ADDITIONAL_PYTHON_PACKAGES:-}
     environment:
       - FOLLOWUP_SCRIPT=${FOLLOWUP_SCRIPT:-/scripts/followup.sh}
     volumes:
