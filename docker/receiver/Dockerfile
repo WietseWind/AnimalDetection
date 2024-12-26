@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     libxrender-dev \
     libgl1-mesa-glx \
     ffmpeg \
+    jq \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
