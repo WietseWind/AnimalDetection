@@ -18,7 +18,7 @@ os.environ['YOLO_VERBOSE'] = 'False'
 
 # Set device
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-detection_model = pw_detection.MegaDetectorV6(device=DEVICE, pretrained=True, version="yolov9c")
+detection_model = pw_detection.MegaDetectorV6(device=DEVICE, pretrained=True, version="MDV6-yolov9-c")
 
 def process_video_for_detection(video_path, quiet=False, show_progress=False, min_confidence=0.0):
     if not os.path.exists(video_path):

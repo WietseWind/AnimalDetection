@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir \
     ${ADDITIONAL_PYTHON_PACKAGES}
 
 # Preload models
-RUN echo "Downloading models... Can take a while..." && python -c "from PytorchWildlife.models import detection; detection.MegaDetectorV6(device='cpu', pretrained=True, version='yolov9c')"
+RUN echo "Downloading models... Can take a while..." && python -c "from PytorchWildlife.models import detection; detection.MegaDetectorV6(device='cpu', pretrained=True, version='MDV6-yolov9-c')"
 
 WORKDIR /app
 COPY app.sh detect.py ./
